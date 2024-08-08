@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * variation controller
+ * color controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::variation.variation');
+module.exports = createCoreController('api::color.color');

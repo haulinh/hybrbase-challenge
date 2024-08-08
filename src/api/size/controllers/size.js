@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * sku controller
+ * size controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::sku.sku');
+module.exports = createCoreController('api::size.size');

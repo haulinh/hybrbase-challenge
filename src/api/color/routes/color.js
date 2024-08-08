@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * sku router
+ * color router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::sku.sku');
+module.exports = createCoreRouter('api::color.color');

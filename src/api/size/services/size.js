@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * sku service
+ * size service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::sku.sku');
+module.exports = createCoreService('api::size.size');
