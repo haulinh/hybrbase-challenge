@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_product_variations",
+  "info": {
+    "displayName": "variations",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "variation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::variation.variation"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "variations",
+  "info": {
+    "singularName": "variation",
+    "pluralName": "variations",
+    "displayName": "variation"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "size",
+        "color"
+      ]
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}
