@@ -788,6 +788,41 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    products: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiColorColor extends Schema.CollectionType {
   collectionName: 'colors';
   info: {
@@ -834,17 +869,17 @@ export interface ApiProductProduct extends Schema.CollectionType {
     name: Attribute.String;
     images: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
     description: Attribute.Text;
-    color: Attribute.Relation<
-      'api::product.product',
-      'oneToOne',
-      'api::color.color'
-    >;
-    size: Attribute.Relation<
-      'api::product.product',
-      'oneToOne',
-      'api::size.size'
-    >;
     specifications: Attribute.Text;
+    product_variation: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'api::product-variation.product-variation'
+    >;
+    category: Attribute.Relation<
+      'api::product.product',
+      'manyToOne',
+      'api::category.category'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -856,6 +891,52 @@ export interface ApiProductProduct extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProductVariationProductVariation
+  extends Schema.CollectionType {
+  collectionName: 'product_variations';
+  info: {
+    singularName: 'product-variation';
+    pluralName: 'product-variations';
+    displayName: 'Product Variation';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    color: Attribute.Relation<
+      'api::product-variation.product-variation',
+      'oneToOne',
+      'api::color.color'
+    >;
+    size: Attribute.Relation<
+      'api::product-variation.product-variation',
+      'oneToOne',
+      'api::size.size'
+    >;
+    price: Attribute.Decimal;
+    product: Attribute.Relation<
+      'api::product-variation.product-variation',
+      'oneToOne',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::product-variation.product-variation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::product-variation.product-variation',
       'oneToOne',
       'admin::user'
     > &
@@ -904,8 +985,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::category.category': ApiCategoryCategory;
       'api::color.color': ApiColorColor;
       'api::product.product': ApiProductProduct;
+      'api::product-variation.product-variation': ApiProductVariationProductVariation;
       'api::size.size': ApiSizeSize;
     }
   }

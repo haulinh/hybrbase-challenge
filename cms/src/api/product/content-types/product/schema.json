@@ -29,18 +29,20 @@
     "description": {
       "type": "text"
     },
-    "color": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::color.color"
-    },
-    "size": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::size.size"
-    },
     "specifications": {
       "type": "text"
+    },
+    "product_variation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product-variation.product-variation",
+      "mappedBy": "product"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "products"
     }
   }
 }
