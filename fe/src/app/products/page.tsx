@@ -1,18 +1,27 @@
-import productAPI from "./api";
+import { Suspense } from "react";
+import { Filter } from "./components";
+import { ProductList } from "./components/ProductList";
 
-const Products = async () => {
-  const products = await productAPI.getProducts();
-  console.log(products);
+const ProductsPage = async ({
+  searchParams,
+}: {
+  searchParams: {
+    color?: string;
+    size?: string;
+  };
+}) => {
   return (
-    <>
-      <h1>Products</h1>
-      <ul>
-        {products?.data?.map((product) => (
-          <li key={product.id}>1</li>
-        ))}
-      </ul>
-    </>
+    <div className="flex">
+      <div className="w-60">
+        <Filter />
+      </div>
+      <div className="grow px-16">
+        <Suspense fallback={<div>Loading...</div>}>
+          <ProductList searchParams={searchParams} />
+        </Suspense>
+      </div>
+    </div>
   );
 };
 
-export default Products;
+export default ProductsPage;
